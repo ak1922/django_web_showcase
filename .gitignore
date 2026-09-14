@@ -1,0 +1,13 @@
+__pycache__/
+
+venv_showcase
+.env
+
+.vscode/
+.idea/
+
+.dockerignore
+
+delete.sh
+NOTES.txt
+checkpoint.md

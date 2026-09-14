@@ -1,0 +1,104 @@
+{% load static %}
+
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>{% block title_content %}{% endblock %}</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet'
+          integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous'>
+    <link href='https://fonts.googleapis.com/css2?family=Roboto&display=swap' rel='stylesheet'>
+    <script src="{% static 'js/htmx.js' %}"></script>
+    {% block css_content %}{% endblock %}
+</head>
+<body class="bg-light" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+    <!-- Include the django-htmx utility extension wrapper script -->
+    {% load django_htmx %}
+    {% django_htmx_script %}
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark mb-4 shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="{% url 'dashboard:home' %}">⚙️ Portfolio Lab</a>
+            <div class="navbar-nav ms-auto align-items-center">
+                {% if user.is_authenticated %}
+                    <span class="nav-link text-light me-3 d-none d-sm-inline">User: <strong>{{ user.username }}</strong></span>
+                    <form action="{% url 'dashboard:logout' %}" method="POST" class="d-inline m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Sign Out</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'dashboard:login' %}" class="btn btn-sm btn-outline-primary">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dynamic Content Target Block -->
+    <div class="container-fluid px-4">
+        <div class="row g-4">
+
+            <!-- Left Side Core Professional Profile Summary Sidebar -->
+            <div class="col-lg-3">
+                <div class="card shadow-sm border border-light-subtle rounded-3 text-center p-4 bg-white sticky-lg-top" style="top: 1.5rem; z-index: 1020;">
+                    <!-- Dynamically targets your media root picture directory placeholder -->
+                    <div class="mb-3 d-inline-block position-relative">
+                        <img src="/pictures/headshot.jpg"
+                             class="rounded-circle img-fluid border border-3 border-light shadow-sm bg-secondary bg-opacity-10"
+                             style="width: 140px; height: 140px; object-fit: cover;"
+                             alt="Developer Profile"
+                             onerror="this.onerror=null; this.src='https://dicebear.com';">
+                    </div>
+
+                    <h5 class="fw-bold text-dark mb-1">Your Name</h5>
+                    <p class="text-primary small fw-semibold mb-3">Backend Architect & Full-Stack Engineer</p>
+
+                    <hr class="text-light-emphasis">
+
+                    <!-- Quick Skill Outakes Matrix Area -->
+                    <div class="text-start mb-3">
+                        <h6 class="fw-bold text-secondary small text-uppercase mb-2">Technical Core</h6>
+                        <div class="d-flex flex-wrap gap-1">
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">Django 6.x</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">PostgreSQL</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">Redis Cluster</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">Celery Workers</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">Docker Specs</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">K8s Topologies</span>
+                        </div>
+                    </div>
+
+                    <div class="text-start mb-2">
+                        <h6 class="fw-bold text-secondary small text-uppercase mb-1">Bio Summary</h6>
+                        <p class="text-muted small mb-0" style="line-height: 1.4;">
+                            Specializing in building high-performance server architectures, robust relational database engines, and secure automation processing workflows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Dynamic Main Application Workspace View Node -->
+            <div class="col-lg-9">
+                {% if messages %}
+                    <div class="alert-container mb-3">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show small" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% block content %}{% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js'
+            integrity='sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI' crossorigin='anonymous'></script>
+</body>
+</html>

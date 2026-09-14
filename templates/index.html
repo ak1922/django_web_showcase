@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title_content %}System Dashboard{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
+    <div class="container-fluid py-2">
+        <h1 class="display-5 fw-bold text-dark">Hypermedia-Driven Django Sandbox</h1>
+        <p class="col-md-10 fs-5 text-muted">
+            An ecosystem of high-performance backend modules built using traditional server-side rendered templates, custom database constraints, and dynamic hypermedia communication flows.
+        </p>
+    </div>
+</div>
+
+<h3 class="mb-4 text-secondary fw-semibold">Available Project Blocks</h3>
+
+<div class="row g-4">
+    <!-- Project 1 Card: Corporate Expense Workflow App -->
+    <div class="col-md-6 col-xxl-4">
+        <div class="card h-100 shadow-sm border-0 bg-white">
+            <div class="card-body d-flex flex-column p-4">
+                <h5 class="card-title fw-bold text-dark mb-1">Corporate Expense Approval Workflow</h5>
+                <h6 class="text-primary small mb-3">Form-Heavy Internal CRUD Engine</h6>
+
+                <p class="card-text text-secondary small flex-grow-1">
+                    An internal corporate dashboard handling multi-tier manager approvals. Uses custom role parameters, validation checking, and dynamic database routing to process company cash flows securely.
+                </p>
+
+                <div class="mb-4">
+                    <!-- Visual Tags showing exactly what rendering paradigm this specific card uses -->
+                    <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 me-1">Traditional Django Templates</span>
+                    <span class="badge bg-dark-subtle text-dark border me-1">Django Forms CRUD</span>
+                    <span class="badge bg-dark-subtle text-dark border me-1">RBAC Authorization</span>
+                </div>
+
+                <!-- Action Control Panel Block -->
+                <div class="d-grid gap-2 mt-auto">
+                    <!-- 1. Primary Action Link to Open the Web Application -->
+                    <a href="{% url 'expenses:dashboard' %}" class="btn btn-primary fw-medium py-2">
+                        <i class="bi bi-rocket-takeoff-fill me-2"></i>Launch Module Sandbox
+                    </a>
+
+                    <!-- 2. Integrated Code Repository Link Targeting Your Celery/Postgres Branch Specs -->
+                    <a href="https://github.com" target="_blank"
+                       class="btn btn-outline-dark fw-medium py-2">
+                        <i class="bi bi-github me-2"></i>View Blueprint Code (Celery + Postgres)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 Card: SaaS Subscription Analytics Engine -->
+    <div class="col-md-6 col-xxl-4">
+        <div class="card h-100 shadow-sm border-0 bg-white">
+            <div class="card-body d-flex flex-column p-4">
+                <h5 class="card-title fw-bold text-dark mb-1">SaaS Subscription Analytics Backend</h5>
+                <h6 class="text-primary small mb-3">Pre-Aggregated Time-Series Engine</h6>
+
+                <p class="card-text text-secondary small flex-grow-1">
+                    A financial metric dashboard tracking MRR, ARR, and customer churn rates. Offloads heavy aggregate logic to background scripts, serving cached time-series snapshots instantly via localized asynchronous requests.
+                </p>
+
+                <div class="mb-4">
+                    <!-- Clean, precise labels for reviewing tech leads -->
+                    <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 me-1">SDA / HTMX Partial Swaps</span>
+                    <span class="badge bg-dark-subtle text-dark border me-1">Time-Series Cache</span>
+                    <span class="badge bg-dark-subtle text-dark border me-1">Management Commands</span>
+                </div>
+
+                <!-- Action Control Panel Block -->
+                <div class="d-grid gap-2 mt-auto">
+                    <!-- 1. Primary Action Link to Launch the Asynchronous Dashboard Web App -->
+                    <a href="{% url 'analytics:dashboard' %}" class="btn btn-primary fw-medium py-2">
+                        <i class="bi bi-rocket-takeoff-fill me-2"></i>Launch Module Sandbox
+                    </a>
+
+                    <!-- 2. Integrated Code Repository Link Targeting Your Analytics Code Base -->
+                    <a href="https://github.com" target="_blank"
+                       class="btn btn-outline-dark fw-medium py-2">
+                        <i class="bi bi-github me-2"></i>View Blueprint Code (HTMX Core)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

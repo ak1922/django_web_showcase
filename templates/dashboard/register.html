@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title_content %}Provision Profile - Sandbox Registry{% endblock %}
+
+{% block content %}
+
+    <!-- Use a clean container layout that keeps inside elements aligned left while centering the card itself -->
+    <div class="row justify-content-center align-items-center text-start" style="min-height: 75vh;">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border border-light-subtle rounded-3">
+                <div class="card-header bg-white border-bottom border-light-subtle py-3 text-center">
+                    <h4 class="mb-0 fw-bold text-dark">Create Sandbox Account</h4>
+                    <p class="text-muted small mb-0 mt-1">Register a unique, unprivileged profile to test employee workflows.</p>
+                </div>
+                <div class="card-body p-4">
+
+                    <form method="POST" action="{% url 'dashboard:register' %}" novalidate class="m-0">
+                        {% csrf_token %}
+
+                        <!-- Loop through form fields with explicitly grouped layout blocks -->
+                        {% for field in form %}
+                            <div class="mb-3 text-start">
+                                <!-- Removed d-flex to keep the label elements inline and tight -->
+                                <label for="{{ field.id_for_label }}" class="form-label small fw-bold text-secondary mb-1">
+                                    <span>{{ field.label }}</span>
+                                    {% if field.field.required %}
+                                        <!-- Now sits immediately next to the field label text -->
+                                        <span class="text-danger small ms-1">*</span>
+                                    {% endif %}
+                                </label>
+
+                                {{ field }}
+
+                                {% if field.help_text %}
+                                    <div class="form-text text-muted mt-1" style="font-size: 0.75rem;">
+                                        {{ field.help_text }}
+                                    </div>
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                    <div class="text-danger small mt-1 fw-medium" style="font-size: 0.8rem;">
+                                        ⚠️ {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <!-- Direct full-width button setup drops tracking shifts -->
+                        <button type="submit" class="btn btn-dark w-100 py-2 mb-3 mt-3 fw-medium">
+                            Provision Profile & Sign In
+                        </button>
+
+                        <div class="text-center mt-2">
+                            <span class="small text-muted">Already registered?</span>
+                            <a href="{% url 'dashboard:login' %}" class="small fw-medium text-decoration-none ms-1">Sign In Here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'dashboard:welcome' %}" class="small text-secondary text-decoration-none">← Return to Gateway</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

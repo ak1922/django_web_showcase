@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title_content %}Welcome to the Developer Lab{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-5">
+    <div class="col-lg-8 text-center">
+        <div class="mb-4 display-1">🚀</div>
+        <h1 class="display-4 fw-extrabold text-dark mb-3">Enterprise Django Sandbox</h1>
+        <p class="lead text-secondary mb-4">
+            A production-ready portfolio built with a monolithic architecture model, clean relational schemas, asynchronous scheduling structures, and granular authorization controls.
+        </p>
+
+        <div class="card bg-white shadow-sm border border-light p-4 mb-4 text-start">
+            <h5 class="fw-bold mb-3">⚙️ Technical Highlights</h5>
+            <ul class="text-secondary small mb-0">
+                <li class="mb-2"><strong>Custom Identity Model:</strong> Uses a decoupled custom <code>AppUser</code> base with isolated application profile extensions.</li>
+                <li class="mb-2"><strong>Asynchronous Task Infrastructure:</strong> Ready for background job loops powered by a Redis Broker and Celery.</li>
+                <li class="mb-2"><strong>Traditional Server Rendering:</strong> Built using pure Django forms, native middleware validation, and semantic Bootstrap layouts.</li>
+            </ul>
+        </div>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+            <a href="{% url 'dashboard:login' %}" class="btn btn-dark btn-lg px-4 me-sm-3 py-3">Enter Sandbox Console</a>
+            <a href="{% url 'dashboard:register' %}" class="btn btn-outline-secondary btn-lg px-4 py-3">Create Test Account</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

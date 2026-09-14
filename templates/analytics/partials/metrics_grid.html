@@ -1,0 +1,98 @@
+<!-- 1. KPI Statistics Grid Rows -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border border-light-subtle rounded-3 bg-white">
+            <div class="card-body p-3">
+                <div class="text-secondary small fw-bold text-uppercase mb-1" style="font-size: 0.72rem;">Monthly Recurring (MRR)</div>
+                <div class="h3 fw-bold mb-0 text-dark">${{ snapshot.mrr|floatformat:2 }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border border-light-subtle rounded-3 bg-white">
+            <div class="card-body p-3">
+                <div class="text-secondary small fw-bold text-uppercase mb-1" style="font-size: 0.72rem;">Annual Run Rate (ARR)</div>
+                <div class="h3 fw-bold mb-0 text-success">${{ snapshot.arr|floatformat:2 }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border border-light-subtle rounded-3 bg-white">
+            <div class="card-body p-3">
+                <div class="text-secondary small fw-bold text-uppercase mb-1" style="font-size: 0.72rem;">Active Customers</div>
+                <div class="h3 fw-bold mb-0 text-primary">{{ snapshot.active_subscriptions_count }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border border-light-subtle rounded-3 bg-white">
+            <div class="card-body p-3">
+                <div class="text-secondary small fw-bold text-uppercase mb-1" style="font-size: 0.72rem;">Customer Churn Rate</div>
+                <div class="h3 fw-bold mb-0 text-danger">{{ snapshot.churn_rate }}%</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2. Dual Interaction Split Row: Simulator Form & Live Event Logger -->
+<div class="row g-4">
+    <!-- Left Column: Interactive Event Generator Simulator Form -->
+    <div class="col-md-5">
+        <div class="card shadow-sm border border-light-subtle rounded-3 bg-white h-100">
+            <div class="card-header bg-light border-bottom border-light-subtle py-2">
+                <h6 class="mb-0 fw-bold text-dark small">💡 Portfolio Event Simulator</h6>
+            </div>
+            <div class="card-body p-3">
+                <p class="text-muted small mb-3">
+                    Simulate real-time subscriber metrics behavior. Submitting fires an async request that updates the metrics instantly via partial page swaps.
+                </p>
+
+                <!-- HTMX Form Interception: Post to recalculate and swap the parent container outer shell -->
+                <form hx-post="{% url 'analytics:recalculate' %}" hx-target="#metrics-and-logs-target" hx-indicator="#loading-spinner" class="m-0">
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-secondary mb-1">Event Action Type</label>
+                        {{ form.event_type }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary mb-1">Monthly Cost Impact ($)</label>
+                        {{ form.mrr_impact }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm w-100 fw-medium">
+                        Inject Event File Stream
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Real-time Live Audited Logs Feed Display -->
+    <div class="col-md-7">
+        <div class="card shadow-sm border border-light-subtle rounded-3 bg-white h-100">
+            <div class="card-header bg-light border-bottom border-light-subtle py-2">
+                <h6 class="mb-0 fw-bold text-dark small">📋 Recent Audited System Logs</h6>
+            </div>
+            <div class="list-group list-group-flush small" style="font-size: 0.8rem;">
+                {% for event in recent_events %}
+                    <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3 bg-white">
+                        <div>
+                            <span class="fw-bold text-dark">User: {{ event.user.username }}</span>
+                            <span class="mx-1 text-muted">•</span>
+                            <span class="text-secondary">{{ event.get_event_type_display }}</span>
+                        </div>
+                        <span class="fw-medium {% if event.event_type == 'CHURN' or event.mrr_impact < 0 %}text-danger{% else %}text-success{% endif %}">
+                            {% if event.mrr_impact >= 0 %}+{% endif %}${{ event.mrr_impact }}
+                        </span>
+                    </div>
+                {% empty %}
+                    <div class="text-center py-5 text-muted">
+                        No telemetry logs available. Use the generator panel to feed the stream.
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-end text-muted small mt-3" style="font-size: 0.72rem;">
+    Last calculated cache snapshot generated: <strong class="text-dark">{{ snapshot.recorded_at|date:"Y-m-d H:i:s" }}</strong>
+</div>

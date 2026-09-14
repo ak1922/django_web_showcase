@@ -60,7 +60,7 @@ INSTALLED_APPS = [
 
     # Portfolio Sub-Applications
     'apps.dashboard.apps.DashboardConfig',
-    'apps.expenses.apps.ExpensesConfig',
+    # 'apps.expenses.apps.ExpensesConfig',
     'apps.analytics.apps.AnalyticsConfig'
 ]
 

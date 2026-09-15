@@ -1,4 +1,4 @@
-<!-- 1. KPI Statistics Grid Rows -->
+
 <div class="row g-3 mb-4">
     <div class="col-md-6 col-lg-3">
         <div class="card h-100 shadow-sm border border-light-subtle rounded-3 bg-white">
@@ -34,9 +34,8 @@
     </div>
 </div>
 
-<!-- 2. Dual Interaction Split Row: Simulator Form & Live Event Logger -->
+
 <div class="row g-4">
-    <!-- Left Column: Interactive Event Generator Simulator Form -->
     <div class="col-md-5">
         <div class="card shadow-sm border border-light-subtle rounded-3 bg-white h-100">
             <div class="card-header bg-light border-bottom border-light-subtle py-2">
@@ -47,7 +46,6 @@
                     Simulate real-time subscriber metrics behavior. Submitting fires an async request that updates the metrics instantly via partial page swaps.
                 </p>
 
-                <!-- HTMX Form Interception: Post to recalculate and swap the parent container outer shell -->
                 <form hx-post="{% url 'analytics:recalculate' %}" hx-target="#metrics-and-logs-target" hx-indicator="#loading-spinner" class="m-0">
                     <div class="mb-2">
                         <label class="form-label small fw-bold text-secondary mb-1">Event Action Type</label>
@@ -65,7 +63,6 @@
         </div>
     </div>
 
-    <!-- Right Column: Real-time Live Audited Logs Feed Display -->
     <div class="col-md-7">
         <div class="card shadow-sm border border-light-subtle rounded-3 bg-white h-100">
             <div class="card-header bg-light border-bottom border-light-subtle py-2">

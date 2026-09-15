@@ -8,11 +8,6 @@ from .forms import UserRegistrationForm
 
 # Welcome page
 def welcome(request):
-    """
-    PUBLIC LANDING PAGE: No login required.
-    Introduces the portfolio, architecture, and technology stack.
-    If already logged in, seamlessly forward them to the dashboard.
-    """
     if request.user.is_authenticated:
         return redirect('dashboard:home')
     return render(request, 'dashboard/welcome.html')
@@ -39,7 +34,6 @@ def register_user(request):
                 f'Account successfully provisioned!. Welcome {new_user.username}'
             )
 
-            # Login the user to the main dashboard
             login(request, new_user)
             return redirect('dashboard:home')
     else:

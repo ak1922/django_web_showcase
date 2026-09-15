@@ -9,7 +9,6 @@
             <p class="text-muted mb-0 small">Asynchronous pre-aggregated financial time-series snapshots.</p>
         </div>
 
-        <!-- HTMX Button to trigger recalculation without form parameters -->
         <button hx-post="{% url 'analytics:recalculate' %}"
                 hx-target="#metrics-and-logs-target"
                 hx-indicator="#loading-spinner"
@@ -18,12 +17,10 @@
         </button>
     </div>
 
-    <!-- Dynamic Asset Loading Spinner Status Loader -->
     <div id="loading-spinner" class="htmx-indicator progress mb-4" style="height: 4px;">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 100%"></div>
     </div>
 
-    <!-- Main Asynchronous Target Shell Node -->
     <div id="metrics-and-logs-target"
          hx-get="{% url 'analytics:dashboard' %}"
          hx-trigger="load"

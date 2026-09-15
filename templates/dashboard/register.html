@@ -4,7 +4,6 @@
 
 {% block content %}
 
-    <!-- Use a clean container layout that keeps inside elements aligned left while centering the card itself -->
     <div class="row justify-content-center align-items-center text-start" style="min-height: 75vh;">
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-sm border border-light-subtle rounded-3">
@@ -17,7 +16,6 @@
                     <form method="POST" action="{% url 'dashboard:register' %}" novalidate class="m-0">
                         {% csrf_token %}
 
-                        <!-- Loop through form fields with explicitly grouped layout blocks -->
                         {% for field in form %}
                             <div class="mb-3 text-start">
                                 <!-- Removed d-flex to keep the label elements inline and tight -->
@@ -45,7 +43,6 @@
                             </div>
                         {% endfor %}
 
-                        <!-- Direct full-width button setup drops tracking shifts -->
                         <button type="submit" class="btn btn-dark w-100 py-2 mb-3 mt-3 fw-medium">
                             Provision Profile & Sign In
                         </button>

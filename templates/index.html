@@ -15,7 +15,6 @@
 <h3 class="mb-4 text-secondary fw-semibold">Available Project Blocks</h3>
 
 <div class="row g-4">
-    <!-- Project 1 Card: Corporate Expense Workflow App -->
     <div class="col-md-6 col-xxl-4">
         <div class="card h-100 shadow-sm border-0 bg-white">
             <div class="card-body d-flex flex-column p-4">
@@ -27,20 +26,16 @@
                 </p>
 
                 <div class="mb-4">
-                    <!-- Visual Tags showing exactly what rendering paradigm this specific card uses -->
                     <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 me-1">Traditional Django Templates</span>
                     <span class="badge bg-dark-subtle text-dark border me-1">Django Forms CRUD</span>
                     <span class="badge bg-dark-subtle text-dark border me-1">RBAC Authorization</span>
                 </div>
 
-                <!-- Action Control Panel Block -->
                 <div class="d-grid gap-2 mt-auto">
-                    <!-- 1. Primary Action Link to Open the Web Application -->
                     <a href="{% url 'expenses:dashboard' %}" class="btn btn-primary fw-medium py-2">
                         <i class="bi bi-rocket-takeoff-fill me-2"></i>Launch Module Sandbox
                     </a>
 
-                    <!-- 2. Integrated Code Repository Link Targeting Your Celery/Postgres Branch Specs -->
                     <a href="https://github.com" target="_blank"
                        class="btn btn-outline-dark fw-medium py-2">
                         <i class="bi bi-github me-2"></i>View Blueprint Code (Celery + Postgres)
@@ -50,7 +45,6 @@
         </div>
     </div>
 
-    <!-- Project 2 Card: SaaS Subscription Analytics Engine -->
     <div class="col-md-6 col-xxl-4">
         <div class="card h-100 shadow-sm border-0 bg-white">
             <div class="card-body d-flex flex-column p-4">
@@ -68,14 +62,12 @@
                     <span class="badge bg-dark-subtle text-dark border me-1">Management Commands</span>
                 </div>
 
-                <!-- Action Control Panel Block -->
                 <div class="d-grid gap-2 mt-auto">
                     <!-- 1. Primary Action Link to Launch the Asynchronous Dashboard Web App -->
                     <a href="{% url 'analytics:dashboard' %}" class="btn btn-primary fw-medium py-2">
                         <i class="bi bi-rocket-takeoff-fill me-2"></i>Launch Module Sandbox
                     </a>
 
-                    <!-- 2. Integrated Code Repository Link Targeting Your Analytics Code Base -->
                     <a href="https://github.com" target="_blank"
                        class="btn btn-outline-dark fw-medium py-2">
                         <i class="bi bi-github me-2"></i>View Blueprint Code (HTMX Core)
